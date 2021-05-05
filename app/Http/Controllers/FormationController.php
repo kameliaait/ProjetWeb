@@ -11,8 +11,11 @@ use Illuminate\Support\Facades\Redirect;
 
 class FormationController extends Controller
 {
-    public function index(){
-        $formation=Formation::with('user')
+    public function index(Request $request){
+        $formation=Formation::when($request->term, function($query, $term){
+            $query->where('title','LIKE', '%'.$term.'%');
+            
+        })->with('user')
         ->select('formations.*', DB::raw(
             '(SELECT COUNT(DISTINCT(user_id))
             FROM completion

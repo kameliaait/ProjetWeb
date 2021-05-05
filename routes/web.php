@@ -12,17 +12,16 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+/*Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return Inertia\Inertia::render('Dashboard');
+})->name('dashboard');*/
 //Route::get('/formation','App\Http\Controllers\FormationController@index')->name('formation.index');
 Route::get('/', function () {
     return view('welcome');
 });
-
-/*Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return Inertia\Inertia::render('Dashboard');
-})->name('dashboard');*/
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
-        return Inertia\Inertia::render('Dashboard');
+        return Inertia\Inertia::render('formation/AddFormation');
     })->name('dashboard');
     Route::get('/formation','App\Http\Controllers\FormationController@index')->name('formation.index');
 

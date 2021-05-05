@@ -7,11 +7,10 @@
                     <div class="flex">
                         <!-- Logo -->
                         <div class="flex-shrink-0 flex items-center">
-                            <inertia-link :href="route('dashboard')">
+                            <inertia-link :href="route('formation.index')">
                                 <jet-application-mark class="block h-9 w-auto" />
                             </inertia-link>
                         </div>
-
                         <!-- Navigation Links -->
                        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                             <jet-nav-link :href="route('formation.index')" :active="route().current('formation.index')">
@@ -125,7 +124,7 @@
             <!-- Responsive Navigation Menu -->
             <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
                 <div class="pt-2 pb-3 space-y-1">
-                    <jet-responsive-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
+                    <jet-responsive-nav-link :href="route('formation.add')" :active="route().current('formation.add')">
                         Ajouter formation
                     </jet-responsive-nav-link>
                 </div>

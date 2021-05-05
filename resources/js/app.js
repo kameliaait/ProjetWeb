@@ -3,7 +3,6 @@ require('./bootstrap');
 require('moment');
 
 import Vue from 'vue';
-
 import { InertiaApp } from '@inertiajs/inertia-vue';
 import { InertiaForm } from 'laravel-jetstream';
 import PortalVue from 'portal-vue';

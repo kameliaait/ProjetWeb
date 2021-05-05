@@ -1,6 +1,10 @@
 <template lang="">
   <app-layout>
     <template #header></template>
+     <div class="p-4"> 
+          <label for="search">Search</label>
+          <input id="search" type="text" v-model="term" @keyup="search" class="ml-2 px-2py-1 text-sm rounded border " >
+        </div>
     <div class="bg-green-200 text-green-500 p-3" v-if="$page.flash.success">{{$page.flash.success}}</div>
     <div v-for='formation in this.formationlist.data' v-bind:key='formation.id'
       class=" p-4 m-5 bg-white rounded overflow-hidden shadow-md relative my-6  hover:shadow-lg">
@@ -28,14 +32,11 @@
       </div>
 
     </div>
+   
     <div class="flex justify-center">
-      <inertia-link v-for="link in formationlist.links"
-        v-if="link.label!='&laquo; Previous'&& link.label!='Next &raquo;'" class="text-indigo-700 border-gray-500 p-5 "
-        :href="link.url" v-bind:key="link.label">
-        <span v-bind:class="{'text-red-700' : link.active}">
-          {{link.label}}
-        </span>
-      </inertia-link>
+      <inertia-link :href="formationlist.prev_page_url" class=" text-indigo-700 px-2" >Previous  </inertia-link>
+      
+      <inertia-link :href="formationlist.next_page_url" class=" text-indigo-700 px-2">  Next</inertia-link>
     </div>
   </app-layout>
 </template>
@@ -44,12 +45,16 @@
   export default {
     data() {
       return {
+        term:"",
         formationlist: this.formation,
       }
     },
     methods: {
       deleteFormation(id) {
         this.$inertia.delete('/formations/delete/' + id);
+      },
+      search(){
+        this.$inertia.get('/formation?term='+this.term)
       },
     },
     components: {

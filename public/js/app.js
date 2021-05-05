@@ -2937,7 +2937,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -4453,16 +4452,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      term: "",
       formationlist: this.formation
     };
   },
   methods: {
     deleteFormation: function deleteFormation(id) {
       this.$inertia["delete"]('/formations/delete/' + id);
+    },
+    search: function search() {
+      this.$inertia.get('/formation?term=' + this.term);
     }
   },
   components: {
@@ -5147,14 +5151,15 @@ function cloneDeep(object) {
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.17.20';
+  var VERSION = '4.17.21';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
 
   /** Error message constants. */
   var CORE_ERROR_TEXT = 'Unsupported core-js use. Try https://npms.io/search?q=ponyfill.',
-      FUNC_ERROR_TEXT = 'Expected a function';
+      FUNC_ERROR_TEXT = 'Expected a function',
+      INVALID_TEMPL_VAR_ERROR_TEXT = 'Invalid `variable` option passed into `_.template`';
 
   /** Used to stand-in for `undefined` hash values. */
   var HASH_UNDEFINED = '__lodash_hash_undefined__';
@@ -5287,10 +5292,11 @@ function cloneDeep(object) {
   var reRegExpChar = /[\\^$.*+?()[\]{}|]/g,
       reHasRegExpChar = RegExp(reRegExpChar.source);
 
-  /** Used to match leading and trailing whitespace. */
-  var reTrim = /^\s+|\s+$/g,
-      reTrimStart = /^\s+/,
-      reTrimEnd = /\s+$/;
+  /** Used to match leading whitespace. */
+  var reTrimStart = /^\s+/;
+
+  /** Used to match a single whitespace character. */
+  var reWhitespace = /\s/;
 
   /** Used to match wrap detail comments. */
   var reWrapComment = /\{(?:\n\/\* \[wrapped with .+\] \*\/)?\n?/,
@@ -5299,6 +5305,18 @@ function cloneDeep(object) {
 
   /** Used to match words composed of alphanumeric characters. */
   var reAsciiWord = /[^\x00-\x2f\x3a-\x40\x5b-\x60\x7b-\x7f]+/g;
+
+  /**
+   * Used to validate the `validate` option in `_.template` variable.
+   *
+   * Forbids characters which could potentially change the meaning of the function argument definition:
+   * - "()," (modification of function parameters)
+   * - "=" (default value)
+   * - "[]{}" (destructuring of function parameters)
+   * - "/" (beginning of a comment)
+   * - whitespace
+   */
+  var reForbiddenIdentifierChars = /[()=,{}\[\]\/\s]/;
 
   /** Used to match backslashes in property paths. */
   var reEscapeChar = /\\(\\)?/g;
@@ -6129,6 +6147,19 @@ function cloneDeep(object) {
   }
 
   /**
+   * The base implementation of `_.trim`.
+   *
+   * @private
+   * @param {string} string The string to trim.
+   * @returns {string} Returns the trimmed string.
+   */
+  function baseTrim(string) {
+    return string
+      ? string.slice(0, trimmedEndIndex(string) + 1).replace(reTrimStart, '')
+      : string;
+  }
+
+  /**
    * The base implementation of `_.unary` without support for storing metadata.
    *
    * @private
@@ -6459,6 +6490,21 @@ function cloneDeep(object) {
     return hasUnicode(string)
       ? unicodeToArray(string)
       : asciiToArray(string);
+  }
+
+  /**
+   * Used by `_.trim` and `_.trimEnd` to get the index of the last non-whitespace
+   * character of `string`.
+   *
+   * @private
+   * @param {string} string The string to inspect.
+   * @returns {number} Returns the index of the last non-whitespace character.
+   */
+  function trimmedEndIndex(string) {
+    var index = string.length;
+
+    while (index-- && reWhitespace.test(string.charAt(index))) {}
+    return index;
   }
 
   /**
@@ -17629,7 +17675,7 @@ function cloneDeep(object) {
       if (typeof value != 'string') {
         return value === 0 ? value : +value;
       }
-      value = value.replace(reTrim, '');
+      value = baseTrim(value);
       var isBinary = reIsBinary.test(value);
       return (isBinary || reIsOctal.test(value))
         ? freeParseInt(value.slice(2), isBinary ? 2 : 8)
@@ -20001,6 +20047,12 @@ function cloneDeep(object) {
       if (!variable) {
         source = 'with (obj) {\n' + source + '\n}\n';
       }
+      // Throw an error if a forbidden character was found in `variable`, to prevent
+      // potential command injection attacks.
+      else if (reForbiddenIdentifierChars.test(variable)) {
+        throw new Error(INVALID_TEMPL_VAR_ERROR_TEXT);
+      }
+
       // Cleanup code by stripping empty strings.
       source = (isEvaluating ? source.replace(reEmptyStringLeading, '') : source)
         .replace(reEmptyStringMiddle, '$1')
@@ -20114,7 +20166,7 @@ function cloneDeep(object) {
     function trim(string, chars, guard) {
       string = toString(string);
       if (string && (guard || chars === undefined)) {
-        return string.replace(reTrim, '');
+        return baseTrim(string);
       }
       if (!string || !(chars = baseToString(chars))) {
         return string;
@@ -20149,7 +20201,7 @@ function cloneDeep(object) {
     function trimEnd(string, chars, guard) {
       string = toString(string);
       if (string && (guard || chars === undefined)) {
-        return string.replace(reTrimEnd, '');
+        return string.slice(0, trimmedEndIndex(string) + 1);
       }
       if (!string || !(chars = baseToString(chars))) {
         return string;
@@ -46157,7 +46209,7 @@ var render = function() {
                 [
                   _c(
                     "inertia-link",
-                    { attrs: { href: _vm.route("dashboard") } },
+                    { attrs: { href: _vm.route("formation.index") } },
                     [
                       _c("jet-application-mark", {
                         staticClass: "block h-9 w-auto"
@@ -46588,8 +46640,8 @@ var render = function() {
                   "jet-responsive-nav-link",
                   {
                     attrs: {
-                      href: _vm.route("dashboard"),
-                      active: _vm.route().current("dashboard")
+                      href: _vm.route("formation.add"),
+                      active: _vm.route().current("formation.add")
                     }
                   },
                   [
@@ -49770,6 +49822,33 @@ var render = function() {
     },
     [
       _vm._v(" "),
+      _c("div", { staticClass: "p-4" }, [
+        _c("label", { attrs: { for: "search" } }, [_vm._v("Search")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.term,
+              expression: "term"
+            }
+          ],
+          staticClass: "ml-2 px-2py-1 text-sm rounded border ",
+          attrs: { id: "search", type: "text" },
+          domProps: { value: _vm.term },
+          on: {
+            keyup: _vm.search,
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.term = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
       _vm.$page.flash.success
         ? _c("div", { staticClass: "bg-green-200 text-green-500 p-3" }, [
             _vm._v(_vm._s(_vm.$page.flash.success))
@@ -49875,24 +49954,25 @@ var render = function() {
       _c(
         "div",
         { staticClass: "flex justify-center" },
-        _vm._l(_vm.formationlist.links, function(link) {
-          return link.label != "&laquo; Previous" &&
-            link.label != "Next &raquo;"
-            ? _c(
-                "inertia-link",
-                {
-                  key: link.label,
-                  staticClass: "text-indigo-700 border-gray-500 p-5 ",
-                  attrs: { href: link.url }
-                },
-                [
-                  _c("span", { class: { "text-red-700": link.active } }, [
-                    _vm._v("\n        " + _vm._s(link.label) + "\n      ")
-                  ])
-                ]
-              )
-            : _vm._e()
-        }),
+        [
+          _c(
+            "inertia-link",
+            {
+              staticClass: " text-indigo-700 px-2",
+              attrs: { href: _vm.formationlist.prev_page_url }
+            },
+            [_vm._v("Previous  ")]
+          ),
+          _vm._v(" "),
+          _c(
+            "inertia-link",
+            {
+              staticClass: " text-indigo-700 px-2",
+              attrs: { href: _vm.formationlist.next_page_url }
+            },
+            [_vm._v("  Next")]
+          )
+        ],
         1
       )
     ],

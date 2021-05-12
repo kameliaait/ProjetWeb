@@ -2,7 +2,7 @@
     <app-layout>
         <template #header></template>
         <div class="m-10 ">
-            <div class="text-xl font-bold mb-4 ml-10 ">{{maformation.episodes[this.currentKey].title}} </div>
+            <div class="text-xl font-medium mb-4 ml-10  ">{{maformation.episodes[this.currentKey].title}} </div>
             <div class="flex justify-center ">
 
                 <iframe width="1200" height="480" :src="maformation.episodes[this.currentKey].video_url" frameborder="0"
@@ -17,7 +17,7 @@
                 <li class="mt-3 flex justify-between items-center">
                     <div>
                         {{episode.title}} - episode {{index+1}}
-                        <button @click="swichepisode(index)"> voir l'episode</button>
+                        <button  @click="swichepisode(index)"> voir l'episode</button>
                     </div>
                     <toggle-button :episode-id="episode.id" :watched-episodes="watched" />
                 </li>

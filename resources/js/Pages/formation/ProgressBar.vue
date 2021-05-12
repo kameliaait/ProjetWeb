@@ -3,7 +3,7 @@
     <div class="w-full">
   <div class="shadow w-full bg-grey-light">
 
-    <div class="bg-green-500 text-xs leading-none py-1 text-center transition-width duration-500 text-white" :style="'width:' + pourcentage + '%'"  >{{pourcentage}} %</div>
+    <div class=" bg-indigo-700 text-xs leading-none py-1 text-center transition-width duration-500 text-white" :style="'width:' + pourcentage + '%'"  >{{pourcentage}} %</div>
   </div>
   </div>
   

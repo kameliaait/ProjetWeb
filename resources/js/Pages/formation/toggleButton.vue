@@ -1,7 +1,7 @@
 <template lang="">
     <div>
         <button
-            class=" text-green-500 text-xs font-bold rounded-full px-2 py-1 cursor-pointer tracking-wider  text- mr-2 border-green-500 md:border-2  hover:bg-green-500 hover:text-white transition ease-out duration-500"
+            class=" text-indigo-700 text-xs font-bold rounded-full px-2 py-1 cursor-pointer tracking-wider  text- mr-2 border-indigo-700 md:border-2  hover:bg-indigo-700 hover:text-white transition ease-out duration-500"
             @click="toggleCompletion()">{{this.iswatched ? 'terminé' : 'terminé?'}}</button>
     </div>
 </template>

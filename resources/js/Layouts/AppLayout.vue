@@ -8,7 +8,9 @@
                         <!-- Logo -->
                         <div class="flex-shrink-0 flex items-center">
                             <inertia-link :href="route('formation.index')">
-                                <jet-application-mark class="block h-9 w-auto" />
+                                <h1  class="text-xl h-9 font-bold text-indigo-700 w-auto">
+                                  LearNet
+                                </h1>
                             </inertia-link>
                         </div>
                         <!-- Navigation Links -->

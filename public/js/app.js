@@ -2937,6 +2937,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -4411,6 +4413,13 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Layouts/AppLayout */ "./resources/js/Layouts/AppLayout.vue");
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -46211,11 +46220,19 @@ var render = function() {
                     "inertia-link",
                     { attrs: { href: _vm.route("formation.index") } },
                     [
-                      _c("jet-application-mark", {
-                        staticClass: "block h-9 w-auto"
-                      })
-                    ],
-                    1
+                      _c(
+                        "h1",
+                        {
+                          staticClass:
+                            "text-xl h-9 font-bold text-indigo-700 w-auto"
+                        },
+                        [
+                          _vm._v(
+                            "\n                              LearNet\n                            "
+                          )
+                        ]
+                      )
+                    ]
                   )
                 ],
                 1
@@ -49025,7 +49042,7 @@ var render = function() {
                 "div",
                 { staticClass: "mb-4" },
                 [
-                  _c("h3", { staticClass: "text-2xl" }, [
+                  _c("h3", { staticClass: "text-xl py-3" }, [
                     _vm._v("Episodes de la formation")
                   ]),
                   _vm._v(" "),
@@ -49035,7 +49052,7 @@ var render = function() {
                         "label",
                         {
                           staticClass:
-                            "block text-grey-darker text-sm font-bold mb-2",
+                            "block text-grey-darker text-sm font-bold mb-2 mt-2",
                           attrs: { for: "title-" + index }
                         },
                         [
@@ -49097,7 +49114,7 @@ var render = function() {
                         "label",
                         {
                           staticClass:
-                            "block text-grey-darker text-sm font-bold mb-2",
+                            "block text-grey-darker text-sm font-bold mb-2 mt-2",
                           attrs: { for: "description-" + index }
                         },
                         [
@@ -49161,7 +49178,7 @@ var render = function() {
                         "label",
                         {
                           staticClass:
-                            "block text-grey-darker text-sm font-bold mb-2",
+                            "block text-grey-darker text-sm font-bold  mt-2",
                           attrs: { for: "video_url-" + index }
                         },
                         [
@@ -49183,7 +49200,7 @@ var render = function() {
                           }
                         ],
                         staticClass:
-                          " border-b my-8 shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker",
+                          " border-b  shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker",
                         attrs: { id: "video_url-" + index, type: "text" },
                         domProps: { value: _vm.form.episodes[index].video_url },
                         on: {
@@ -49226,13 +49243,13 @@ var render = function() {
                 2
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "inline-flex mb-5" }, [
+              _c("div", { staticClass: "inline-flex justify-center mb-5" }, [
                 _vm.form.episodes.length < 15
                   ? _c(
                       "button",
                       {
                         staticClass:
-                          "bg-green-300 hover:bg-green-400 text-gray-800 font-bold py-2 px-4 rounded-l",
+                          " bg-blue-400 hover:bg-blue-500 text-gray-800 font-bold py-1 px-3 rounded-l",
                         on: {
                           click: function($event) {
                             $event.preventDefault()
@@ -49242,7 +49259,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n                        Ajouter ep\n                    "
+                          "\n                        Ajouter une épisode\n                    "
                         )
                       ]
                     )
@@ -49253,7 +49270,7 @@ var render = function() {
                       "button",
                       {
                         staticClass:
-                          "bg-red-300 hover:bg-red-400 text-gray-800 font-bold py-2 px-4 rounded-r",
+                          " bg-red-400 hover:bg-red-500 text-gray-800 font-bold py-1 px-3 rounded-r",
                         on: {
                           click: function($event) {
                             $event.preventDefault()
@@ -49263,7 +49280,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n                        Supprimer ep\n                    "
+                          "\n                        Supprimer une épisode\n                    "
                         )
                       ]
                     )
@@ -49274,7 +49291,7 @@ var render = function() {
                 "button",
                 {
                   staticClass:
-                    "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-auto rounded",
+                    "bg-indigo-700 hover:bg-indigo-800 text-white font-bold py-2 px-4 mr-auto rounded",
                   attrs: { type: "submit" }
                 },
                 [
@@ -49776,7 +49793,7 @@ var render = function() {
           "div",
           {
             staticClass:
-              "bg-green-500 text-xs leading-none py-1 text-center transition-width duration-500 text-white",
+              " bg-indigo-700 text-xs leading-none py-1 text-center transition-width duration-500 text-white",
             style: "width:" + _vm.pourcentage + "%"
           },
           [_vm._v(_vm._s(_vm.pourcentage) + " %")]
@@ -49822,31 +49839,47 @@ var render = function() {
     },
     [
       _vm._v(" "),
-      _c("div", { staticClass: "p-4" }, [
-        _c("label", { attrs: { for: "search" } }, [_vm._v("Search")]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.term,
-              expression: "term"
-            }
-          ],
-          staticClass: "ml-2 px-2py-1 text-sm rounded border ",
-          attrs: { id: "search", type: "text" },
-          domProps: { value: _vm.term },
-          on: {
-            keyup: _vm.search,
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+      _c("div", { staticClass: " md:ml-4/5 md:mr-4 p-1" }, [
+        _c(
+          "div",
+          { staticClass: "bg-white flex items-center rounded-full shadow-xl" },
+          [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.term,
+                  expression: "term"
+                }
+              ],
+              staticClass:
+                "rounded-l-full w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none",
+              attrs: { id: "search", type: "text", placeholder: "Search" },
+              domProps: { value: _vm.term },
+              on: {
+                keyup: _vm.search,
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.term = $event.target.value
+                }
               }
-              _vm.term = $event.target.value
-            }
-          }
-        })
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "p-2" }, [
+              _c(
+                "button",
+                {
+                  staticClass:
+                    "bg-blue-500 text-white rounded-full p-2 hover:bg-blue-400 focus:outline-none w-6 h-6 flex items-center justify-center"
+                },
+                [_vm._v("\n        🔎\n      ")]
+              )
+            ])
+          ]
+        )
       ]),
       _vm._v(" "),
       _vm.$page.flash.success
@@ -49869,17 +49902,18 @@ var render = function() {
                 "span",
                 {
                   staticClass:
-                    " text-purple-500 italic  text-xs m-2 p-2 inline-block "
+                    " text-gray-500 italic  text-xs m-2 p-2 inline-block "
                 },
                 [
                   _vm._v(
-                    "\n        " +
+                    "\n          " +
                       _vm._s(formation.episodes_count) +
                       " Episodes, "
                   ),
                   _c("span", { staticClass: "text-red-600 text-xs italic" }, [
                     _vm._v(
-                      _vm._s(formation.participants) + "\n          participant"
+                      _vm._s(formation.participants) +
+                        "\n            participant"
                     )
                   ]),
                   parseInt(formation.participants) > 1
@@ -49898,9 +49932,9 @@ var render = function() {
               _vm._v(" "),
               _c("span", { staticClass: " text-gray-500 text-sm " }, [
                 _vm._v(
-                  "\n        Autheur: " +
+                  "\n          Autheur: " +
                     _vm._s(formation.user.name) +
-                    "\n      "
+                    "\n        "
                 )
               ])
             ]),
@@ -49910,7 +49944,7 @@ var render = function() {
                 "a",
                 {
                   staticClass:
-                    " text-green-500 text-xs font-bold rounded-full px-2 py-1 cursor-pointer tracking-wider  text- mr-2 border-green-500 md:border-2  hover:bg-green-500 hover:text-white transition ease-out duration-500",
+                    " text-blue-500 text-xs font-bold rounded-full px-2 py-1 cursor-pointer tracking-wider  text- mr-2 border-blue-500 md:border-2  hover:bg-blue-500 hover:text-white transition ease-out duration-500",
                   attrs: {
                     href: "formation/" + formation.id,
                     epnumber: formation.episodes_count
@@ -49924,7 +49958,7 @@ var render = function() {
                     "a",
                     {
                       staticClass:
-                        " text-yellow-500 text-xs font-bold rounded-full px-2 py-1 cursor-pointer tracking-wider  text- mr-2 border-yellow-500 md:border-2  hover:bg-yellow-500 hover:text-white transition ease-out duration-500",
+                        " text-yellow-400 text-xs font-bold rounded-full px-2 py-1 cursor-pointer tracking-wider  text- mr-2 border-yellow-400 md:border-2  hover:bg-yellow-400 hover:text-white transition ease-out duration-500",
                       attrs: { href: "formations/edit/" + formation.id }
                     },
                     [_vm._v("Editer")]
@@ -50020,7 +50054,7 @@ var render = function() {
         "div",
         { staticClass: "m-10 " },
         [
-          _c("div", { staticClass: "text-xl font-bold mb-4 ml-10 " }, [
+          _c("div", { staticClass: "text-xl font-medium mb-4 ml-10  " }, [
             _vm._v(
               _vm._s(_vm.maformation.episodes[this.currentKey].title) + " "
             )
@@ -50125,7 +50159,7 @@ var render = function() {
       "button",
       {
         staticClass:
-          " text-green-500 text-xs font-bold rounded-full px-2 py-1 cursor-pointer tracking-wider  text- mr-2 border-green-500 md:border-2  hover:bg-green-500 hover:text-white transition ease-out duration-500",
+          " text-indigo-700 text-xs font-bold rounded-full px-2 py-1 cursor-pointer tracking-wider  text- mr-2 border-indigo-700 md:border-2  hover:bg-indigo-700 hover:text-white transition ease-out duration-500",
         on: {
           click: function($event) {
             return _vm.toggleCompletion()

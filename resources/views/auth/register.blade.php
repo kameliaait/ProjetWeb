@@ -1,7 +1,12 @@
 <x-guest-layout>
     <x-jet-authentication-card>
+                                <!-- Logo -->
+                                <div class="flex-shrink-0 flex items-center justify-center">
+                                        <h1  class=" text-xl h-9 font-bold text-indigo-700 w-auto">
+                                          LearNet
+                                        </h1>
+                                </div>
         <x-slot name="logo">
-            <x-jet-authentication-card-logo />
         </x-slot>
 
         <x-jet-validation-errors class="mb-4" />

@@ -31,10 +31,10 @@
                     </div>
 
                     <div class="mb-4">
-                        <h3 class="text-2xl">Episodes de la formation</h3>
+                        <h3 class="text-xl py-3">Episodes de la formation</h3>
                         <div v-for="(episode,index) in form.episodes" v-bind:key="index">
 
-                            <label class="block text-grey-darker text-sm font-bold mb-2" :for="'title-'+index">
+                            <label class="block text-grey-darker text-sm font-bold mb-2 mt-2" :for="'title-'+index">
                                 Titre de l'episode numero: {{index +1 }}
                             </label>
                             <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker"
@@ -44,7 +44,7 @@
                                 v-if="$page.errors['episodes.'+index+'.title']">
                                 {{ $page.errors['episodes.'+index+'.title'][0]}}</div>
 
-                            <label class="block text-grey-darker text-sm font-bold mb-2" :for="'description-'+index">
+                            <label class="block text-grey-darker text-sm font-bold mb-2 mt-2" :for="'description-'+index">
                                 Description de l'episode numero: {{index +1 }}
                             </label>
                             <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker"
@@ -53,11 +53,11 @@
                             <div class=" my-2 bg-red-200 text-red-800 p-4"
                                 v-if="$page.errors['episodes.'+index+'.description']">
                                 {{ $page.errors['episodes.'+index+'.description'][0]}}</div>
-                            <label class="block text-grey-darker text-sm font-bold mb-2" :for="'video_url-'+index">
+                            <label class="block text-grey-darker text-sm font-bold  mt-2" :for="'video_url-'+index">
                                 URL de la video de l'episode numero: {{index +1 }}
                             </label>
                             <input
-                                class=" border-b my-8 shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker"
+                                class=" border-b  shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker"
                                 :id="'video_url-'+index" type="text" v-model="form.episodes[index].video_url">
                             <div class=" my-2 bg-red-200 text-red-800 p-4"
                                 v-if="$page.errors['episodes.'+index+'.video_url']">
@@ -65,18 +65,18 @@
                             <div class="border-b my-5"></div>
                         </div>
                     </div>
-                    <div class="inline-flex mb-5">
-                        <button class="bg-green-300 hover:bg-green-400 text-gray-800 font-bold py-2 px-4 rounded-l"
+                    <div class="inline-flex justify-center mb-5">
+                        <button class=" bg-blue-400 hover:bg-blue-500 text-gray-800 font-bold py-1 px-3 rounded-l"
                             v-if="form.episodes.length<15" @click.prevent="add">
-                            Ajouter ep
+                            Ajouter une épisode
                         </button>
-                        <button class="bg-red-300 hover:bg-red-400 text-gray-800 font-bold py-2 px-4 rounded-r"
+                        <button class=" bg-red-400 hover:bg-red-500 text-gray-800 font-bold py-1 px-3 rounded-r"
                             v-if="form.episodes.length>1" @click.prevent="remove">
-                            Supprimer ep
+                            Supprimer une épisode
                         </button>
                     </div>
 
-                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-auto rounded"
+                    <button class="bg-indigo-700 hover:bg-indigo-800 text-white font-bold py-2 px-4 mr-auto rounded"
                         type="submit">
                         Créer Ma formation
                     </button>
